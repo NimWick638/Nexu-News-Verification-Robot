@@ -33,8 +33,8 @@ void loop() {
     if (command == '\n' || command == '\r') {
       return;
     }
-    // Process command
-    switch (command) {
+    // Process command (case-insensitive)
+    switch (toupper(command)) {
       case 'F': // Move Forward
         digitalWrite(IN1, HIGH);
         digitalWrite(IN2, LOW);
