@@ -23,11 +23,65 @@ void setup() {
   Serial.println("Arduino Ready");
 }
 
-void loopcutter() {
+void loop() {
   if (Serial.available() > 0) {
     char command = Serial.read(); // Read incoming serial data
-    // Print raw ASCII value for debugging
+    // Print raw ASCII value for
+
+
     Serial.print("Received ASCII: ");
     Serial.println((int)command);
+    // Process command
+    switch (command) {
+      case 'F': // Move Forward
+        digitalWrite(IN1, HIGH);
+        digitalWrite(IN2, LOW);
+        digitalWrite(IN3, HIGH);
+        digitalWrite(IN4, LOW);
+        analogWrite(ENA, 200);
+        analogWrite(ENB, 200);
+        Serial.println("Moving Forward");
+        break;
+      case 'B': // Move Backward
+        digitalWrite(IN1, LOW);
+        digitalWrite(IN2, HIGH);
+        digitalWrite(IN3, LOW);
+        digitalWrite(IN4, HIGH);
+        analogWrite(ENA, 200);
+        analogWrite(ENB, 200);
+        Serial.println("Moving Backward");
+        break;
+      case 'L': // Turn Left
+        digitalWrite(IN1, LOW);
+        digitalWrite(IN2, HIGH);
+        digitalWrite(IN3, HIGH);
+        digitalWrite(IN4, LOW);
+        analogWrite(ENA, 150);
+        analogWrite(ENB, 150);
+        Serial.println("Turning Left");
+        break;
+      case 'R': // Turn Right
+        digitalWrite(IN1, HIGH);
+        digitalWrite(IN2, LOW);
+        digitalWrite(IN3, LOW);
+        digitalWrite(IN4, HIGH);
+        analogWrite(ENA, 150);
+        analogWrite(ENB, 150);
+        Serial.println("Turning Right");
+        break;
+      case 'S': // Stop
+        digitalWrite(IN1, LOW);
+        digitalWrite(IN2, LOW);
+        digitalWrite(IN3, LOW);
+        digitalWrite(IN4, LOW);
+        analogWrite(ENA, 0);
+        analogWrite(ENB, 0);
+        Serial.println("Stopped");
+        break;
+      default:
+        Serial.print("Invalid Command: ");
+        Serial.println(command);
+        break;
+    }
   }
 }
