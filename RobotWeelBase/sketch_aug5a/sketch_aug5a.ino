@@ -26,11 +26,13 @@ void setup() {
 void loop() {
   if (Serial.available() > 0) {
     char command = Serial.read(); // Read incoming serial data
-    // Print raw ASCII value for
-
-
+    // Print raw ASCII value for debugging
     Serial.print("Received ASCII: ");
     Serial.println((int)command);
+    // Ignore newline (10) and carriage return (13)
+    if (command == '\n' || command == '\r') {
+      return;
+    }
     // Process command
     switch (command) {
       case 'F': // Move Forward
