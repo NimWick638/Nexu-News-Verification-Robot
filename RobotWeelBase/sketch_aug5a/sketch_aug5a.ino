@@ -22,3 +22,12 @@ void setup() {
   analogWrite(ENB, 0);
   Serial.println("Arduino Ready");
 }
+
+void loopcutter() {
+  if (Serial.available() > 0) {
+    char command = Serial.read(); // Read incoming serial data
+    // Print raw ASCII value for debugging
+    Serial.print("Received ASCII: ");
+    Serial.println((int)command);
+  }
+}
